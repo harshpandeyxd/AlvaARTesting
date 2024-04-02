@@ -216,13 +216,16 @@
                     
                     // planePose holds the rotation/translation information of a detected plane
                     const planePose = alva.findPlane();
+                    if (planePose != null)
+                    {
+                        // Draw the Plane here
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
+                    }
 
                     if( pose )
                     {
                         view.updateCameraPose( pose );
-                        // Draw the Plane here
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
                     }
                     else
                     {
