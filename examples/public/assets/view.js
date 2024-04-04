@@ -22,11 +22,17 @@ class ARCamView
         this.object.position.set( x, y, z );
         this.object.visible = false;
 
+        this.object2 = new THREE.Mesh( new THREE.PlaneGeometry( 1, 1 ), new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} ) );
+        this.object2.scale.set( scale, scale, scale );
+        this.object2.position.set( x, y, z );
+        this.object2.visible = true;
+
         this.scene = new THREE.Scene();
         this.scene.add( new THREE.AmbientLight( 0x808080 ) );
         this.scene.add( new THREE.HemisphereLight( 0x404040, 0xf0f0f0, 1 ) );
         this.scene.add( this.camera );
         this.scene.add( this.object );
+        this.scene.add( this.object2 );
 
         container.appendChild( this.renderer.domElement );
 
@@ -45,6 +51,11 @@ class ARCamView
         this.applyPose( pose, this.camera.quaternion, this.camera.position );
 
         this.object.visible = true;
+    }
+
+    updatePlanePost ( planePose )
+    {
+        this.applyPose( planePose, this.camera.quaternion, this.camera.position );
     }
 
     lostCamera()

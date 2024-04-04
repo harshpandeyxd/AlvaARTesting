@@ -153,6 +153,24 @@ int System::getFramePoints(int pointsPtr)
     return numPoints;
 }
 
+int System::getFramePoints3D(int pointsPtr)
+{
+    auto *data = reinterpret_cast<int *>(pointsPtr);
+
+    int numPoints = currFrame_->getKeypoints3d().size();
+    int n = std::min(numPoints * 3, 4096);
+
+    for (int i = 0, j = 0; i < n; ++i)
+    {
+        cv::Point2f p = currFrame_->getKeypoints2d()[i].unpx_;
+        data[j++] = (int) p.x;
+        data[j++] = (int) p.y;
+        data[j++] = (int) p.z;
+    }
+
+    return numPoints;
+}
+
 int System::processCameraPose(cv::Mat &image, double timestamp)
 {
     currFrame_->id_++;

@@ -219,8 +219,9 @@
                     if (planePose != null)
                     {
                         // Draw the Plane here
-                        ctx.fillStyle = 'red'; // Set fill color to red
-                        ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
+                        view.updateCameraPose(planePose);
+                        //ctx.fillStyle = 'red'; // Set fill color to red
+                        //ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
                     }
 
                     if( pose )
@@ -233,11 +234,12 @@
 
                         const dots = alva.getFramePoints();
 
-                        for( const p of dots )
-                        {
-                            ctx.fillStyle = 'white';
-                            ctx.fillRect( p.x, p.y, 2, 2 );
-                        }
+                        // for( const p of dots )
+                        // {
+                        //     ctx.fillStyle = 'white';
+                        //     ctx.
+                        //     ctx.fillRect( p.x, p.y, 2, 2 );
+                        // }
                     }
                 }
 

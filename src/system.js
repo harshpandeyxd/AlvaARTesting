@@ -230,6 +230,25 @@ class AlvaAR
         return points;
     }
 
+    getFramePoints3D()
+    {
+        const numPoints = this.system.getFramePoints3D( this.memPts.ptr );
+
+        const points = new Array( numPoints );
+
+        if( numPoints > 0 )
+        {
+            const data = this.memPts.read( numPoints * 3 );
+
+            for( let i = 0, j = 0; i < numPoints; i++ )
+            {
+                points[i] = { x: data[j++], y: data[j++], z: data[j++] };
+            }
+        }
+
+        return points;
+    }
+
     reset()
     {
         this.system.reset();

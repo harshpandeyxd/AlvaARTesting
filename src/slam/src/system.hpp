@@ -36,6 +36,7 @@ public:
     int findPlane(int locationPtr, int numIterations);
 
     int getFramePoints(int pointsPtr);
+    int getFramePoints3D(int pointsPtr);
 
 private:
     cv::Mat processPlane(std::vector<Eigen::Vector3d> mapPoints, Sophus::SE3d Twc, int numIterations = 50);
