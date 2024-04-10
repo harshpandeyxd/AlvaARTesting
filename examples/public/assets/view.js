@@ -28,17 +28,17 @@ class ARCamView
         this.object2.position.set( x, y, z );
         this.object2.visible = true;
 
-        // this.geometry = new TextGeometry( 'Hello three.js!', {
-        //     font: font,
-        //     size: 80,
-        //     depth: 5,
-        //     curveSegments: 12,
-        //     bevelEnabled: true,
-        //     bevelThickness: 10,
-        //     bevelSize: 8,
-        //     bevelOffset: 0,
-        //     bevelSegments: 5
-        // } );
+        this.geometry = new TextGeometry( 'Hello three.js!', {
+            font: font,
+            size: 80,
+            depth: 5,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 10,
+            bevelSize: 8,
+            bevelOffset: 0,
+            bevelSegments: 5
+        } );
 
 
         this.scene = new THREE.Scene();
@@ -47,7 +47,7 @@ class ARCamView
         this.scene.add( this.camera );
         this.scene.add( this.object );
         this.scene.add( this.object2 );
-        //this.scene.add(this.geometry);
+        this.scene.add(this.geometry);
 
         container.appendChild( this.renderer.domElement );
 
@@ -61,27 +61,27 @@ class ARCamView
         render();
     }
 
-    createTextSprite(message, fontsize = 32)
-    {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = `${fontsize}px Arial`;
-        context.fillStyle = "#ffffff"; // white text
+    // createTextSprite(message, fontsize = 32)
+    // {
+    //     const canvas = document.createElement('canvas');
+    //     const context = canvas.getContext('2d');
+    //     context.font = `${fontsize}px Arial`;
+    //     context.fillStyle = "#ffffff"; // white text
     
-        const metrics = context.measureText(message);
-        const textWidth = metrics.width;
-        canvas.width = textWidth;
-        canvas.height = fontsize; // enough height to accommodate text
-        context.font = `${fontsize}px Arial`;
-        context.fillStyle = "#ffffff"; // reapply since canvas reset can clear settings
-        context.fillText(message, 0, fontsize);
+    //     const metrics = context.measureText(message);
+    //     const textWidth = metrics.width;
+    //     canvas.width = textWidth;
+    //     canvas.height = fontsize; // enough height to accommodate text
+    //     context.font = `${fontsize}px Arial`;
+    //     context.fillStyle = "#ffffff"; // reapply since canvas reset can clear settings
+    //     context.fillText(message, 0, fontsize);
     
-        const texture = new THREE.CanvasTexture(canvas);
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 1); // scale sprite accordingly
-        return sprite;
-    }
+    //     const texture = new THREE.CanvasTexture(canvas);
+    //     const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
+    //     const sprite = new THREE.Sprite(spriteMaterial);
+    //     sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 1); // scale sprite accordingly
+    //     return sprite;
+    // }
 
     updateCameraPose( pose )
     {
