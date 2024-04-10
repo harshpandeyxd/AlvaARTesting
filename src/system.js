@@ -234,19 +234,49 @@ class AlvaAR
     {
         const numPoints = this.system.getFramePoints3D( this.memPts.ptr );
 
-        const points = new Array( numPoints );
+        //const points = new Float32Array( numPoints );
 
-        if( numPoints > 0 )
+        // Get data byte size, allocate memory on Emscripten heap, and get pointer
+        // var nDataBytes = points.length * points.BYTES_PER_ELEMENT;
+        // //Module.TOTAL_MEMORY = nDataBytes; // added by jo
+        // var dataPtr = Module._malloc(nDataBytes);
+        // // Copy data to Emscripten heap (directly accessed from Module.HEAPU8)
+        // var dataHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, nDataBytes);
+        // dataHeap.set(new Uint8Array(points.buffer));
+        // var result = new Float32Array(dataHeap.buffer, dataHeap.byteOffset, points.length);
+        // // Free memory
+        // Module._free(dataHeap.byteOffset);
+
+        // if( numPoints > 0 )
+        // {
+        //     const data = this.memPts.heap.read( numPoints * 3 );
+
+        //     for( let i = 0, j = 0; i < numPoints; i++ )
+        //     {
+        //         points[i] = { x: data[j++], y: data[j++], z: data[j++] };
+        //     }
+        // }
+
+        // return points;
+
+        if(numPoints > 0) 
         {
-            const data = this.memPts.read( numPoints * 3 );
-
-            for( let i = 0, j = 0; i < numPoints; i++ )
+            const dataPtr = this.memPts.ptr / 4; // Assuming `this.memPts.ptr` is byte-aligned, need to divide by 4 for float32 indexing
+            const points = new Float32Array(this.wasm.module.HEAPF32.buffer, dataPtr * Float32Array.BYTES_PER_ELEMENT, numPoints * 3);
+    
+            const resultPoints = [];
+            for (let i = 0; i < numPoints; i++)
             {
-                points[i] = { x: data[j++], y: data[j++], z: data[j++] };
+                const x = points[i*3];
+                const y = points[i*3 + 1];
+                const z = points[i*3 + 2];
+                resultPoints.push({ x, y, z });
             }
+    
+            return resultPoints;
         }
-
-        return points;
+    
+        return [];
     }
 
     reset()

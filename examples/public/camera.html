@@ -195,6 +195,11 @@
 
             document.body.appendChild( Stats.el );
             document.body.addEventListener( "click", () => alva.reset(), false );
+            
+            const label = view.createTextSprite(`(${0}, ${0}, ${0})`);
+            label.position.set(0, 0, 0); // position slightly above the dot
+            view.scene.add(label);
+            console.log(view.scene);
 
             onFrame( () =>
             {
@@ -215,13 +220,30 @@
                     Stats.stop( 'slam' );
                     
                     // planePose holds the rotation/translation information of a detected plane
-                    const planePose = alva.findPlane();
-                    if (planePose != null)
+                    // const planePose = alva.findPlane();
+                    // if (planePose != null)
+                    // {
+                    //     // Draw the Plane here
+                    //     view.updatePlanePose(planePose);
+                    //     //ctx.fillStyle = 'red'; // Set fill color to red
+                    //     //ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
+                    // }
+                    
+                    const dots = alva.getFramePoints3D();
+                    // Get 3D points, create a plane for the lowest set of points and keep it visible.
+                    dots.forEach((p, index) => 
                     {
-                        // Draw the Plane here
-                        view.updateCameraPose(planePose);
-                        //ctx.fillStyle = 'red'; // Set fill color to red
-                        //ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
+                        // const label = view.createTextSprite(`(${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)})`);
+                        // label.position.set(p.x, p.y + 0.1, p.z); // position slightly above the dot
+                        // view.scene.add(label);
+                        console.log(`Point ${index}:`, p.x, p.y, p.z);
+                    });
+
+                    const dots2D = alva.getFramePoints();
+                    for( const p of dots2D )
+                    {
+                        ctx.fillStyle = 'white'
+                        ctx.fillRect( p.x, p.y, 2, 2 );
                     }
 
                     if( pose )
@@ -231,15 +253,6 @@
                     else
                     {
                         view.lostCamera();
-
-                        const dots = alva.getFramePoints();
-
-                        // for( const p of dots )
-                        // {
-                        //     ctx.fillStyle = 'white';
-                        //     ctx.
-                        //     ctx.fillRect( p.x, p.y, 2, 2 );
-                        // }
                     }
                 }
 

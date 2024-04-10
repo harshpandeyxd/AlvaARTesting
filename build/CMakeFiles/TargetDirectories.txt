@@ -1,0 +1,7 @@
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/alva_ar.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/edit_cache.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/rebuild_cache.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/list_install_components.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/install.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/install/local.dir
+/Users/harshpandey/Documents/AlvaARTesting/build/CMakeFiles/install/strip.dir

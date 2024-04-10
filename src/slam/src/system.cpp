@@ -155,17 +155,22 @@ int System::getFramePoints(int pointsPtr)
 
 int System::getFramePoints3D(int pointsPtr)
 {
-    auto *data = reinterpret_cast<int *>(pointsPtr);
+    auto *data = reinterpret_cast<float *>(pointsPtr);
 
     int numPoints = currFrame_->getKeypoints3d().size();
     int n = std::min(numPoints * 3, 4096);
-
-    for (int i = 0, j = 0; i < n; ++i)
+    std::cout << "Number of Points: " << numPoints << std::endl;
+    int i = 0; // Keep track of points
+    for (int j = 0; j < n && i < numPoints; j += 3)
     {
-        cv::Point2f p = currFrame_->getKeypoints2d()[i].unpx_;
-        data[j++] = (int) p.x;
-        data[j++] = (int) p.y;
-        data[j++] = (int) p.z;
+        Eigen::Vector3d p = currFrame_->getKeypoints3d()[i].bv_;
+        std::cout << " Point " << i << " is: " << p[0] << ", " << p[1] << ", " << p[2] << std::endl;
+        
+        data[j] = static_cast<float>(p[0]);
+        data[j+1] = static_cast<float>(p[1]);
+        data[j+2] = static_cast<float>(p[2]);
+        
+        i++; // Move to the next point after storing its coordinates
     }
 
     return numPoints;
