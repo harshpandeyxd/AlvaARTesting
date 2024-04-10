@@ -1,7 +1,7 @@
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js';
 import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/controls/OrbitControls.js';
 import { AlvaARConnectorTHREE } from './alva_ar_three.js';
-import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGeometry.js';
+//import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGeometry.js';
 
 class ARCamView
 {
@@ -28,17 +28,17 @@ class ARCamView
         this.object2.position.set( x, y, z );
         this.object2.visible = true;
 
-        this.geometry = new TextGeometry( 'Hello three.js!', {
-            font: font,
-            size: 80,
-            depth: 5,
-            curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-        } );
+        // this.geometry = new TextGeometry( 'Hello three.js!', {
+        //     font: font,
+        //     size: 80,
+        //     depth: 5,
+        //     curveSegments: 12,
+        //     bevelEnabled: true,
+        //     bevelThickness: 10,
+        //     bevelSize: 8,
+        //     bevelOffset: 0,
+        //     bevelSegments: 5
+        // } );
 
 
         this.scene = new THREE.Scene();
@@ -46,8 +46,8 @@ class ARCamView
         this.scene.add( new THREE.HemisphereLight( 0x404040, 0xf0f0f0, 1 ) );
         this.scene.add( this.camera );
         this.scene.add( this.object );
-        this.scene.add( this.object2 );
-        this.scene.add(this.geometry);
+        //this.scene.add( this.object2 );
+        //this.scene.add(this.geometry);
 
         container.appendChild( this.renderer.domElement );
 

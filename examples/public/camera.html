@@ -148,6 +148,7 @@
     import { AlvaAR } from './assets/alva_ar.js';
     import { ARCamView } from "./assets/view.js";
     import { Camera, onFrame, resize2cover } from "./assets/utils.js";
+    import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js';
 
     function main()
     {
@@ -228,6 +229,24 @@
                     //     //ctx.fillStyle = 'red'; // Set fill color to red
                     //     //ctx.fillRect( planePose.x, planePose.y, planePose.width, planePose.height );
                     // }
+
+                    // const dots = alva.getFramePoints3D();
+                    // const element = view.renderer.domElement; // Reference to the renderer's canvas element
+
+                    // dots.forEach((p, index) => 
+                    // {
+                    //     // Assuming `p.x`, `p.y` are your NDC coordinates and `p.z` is ignored for 2D projection
+                    //     const x = Math.round((p.x + 1) * 0.5 * element.width);
+                    //     const y = Math.round((1 - p.y) * 0.5 * element.height);
+
+                    //     ctx.fillStyle = 'white';
+                    //     ctx.fillRect(x, y, 2, 2); // Draws a small white dot at the calculated 2D position
+
+                    //     const positionText = `(${p.x.toFixed(2)}, ${p.y.toFixed(2)})`; // Formatting text for display
+                    //     ctx.fillText(positionText, x + 2, y + 12); // Offset text a bit from the dot for clarity
+
+                    //     console.log(`NDC Point ${index}:`, p.x, p.y, 'converts to 2D Point:', x, y);
+                    // });
                     
                     const dots = alva.getFramePoints3D();
                     // Get 3D points, create a plane for the lowest set of points and keep it visible.
@@ -240,11 +259,18 @@
                     });
 
                     const dots2D = alva.getFramePoints();
-                    for( const p of dots2D )
+                    dots2D.forEach((p, index) => 
                     {
-                        ctx.fillStyle = 'white'
-                        ctx.fillRect( p.x, p.y, 2, 2 );
-                    }
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(p.x, p.y, 2, 2); // Draws a small white dot at the 2D position
+                        console.log(`2D Point ${index}:`, p.x, p.y);
+                        if (dots != null && dots[index] != null)
+                        {
+                            const dot3D = dots[index]; // Get the corresponding 3D point
+                            const positionText = `(${dot3D.x.toFixed(2)}, ${dot3D.y.toFixed(2)}, ${dot3D.z.toFixed(2)})`;
+                            ctx.fillText(positionText, p.x, p.y - 10); // Positions the text slightly above the dot
+                        }
+                    });
 
                     if( pose )
                     {
