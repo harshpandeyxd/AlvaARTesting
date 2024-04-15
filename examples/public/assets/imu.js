@@ -218,7 +218,7 @@ class IMU
             //     this.screenOrientationAngle = 0;
             // }
 
-            this.screenOrientationAngle = 90;
+            this.screenOrientationAngle = 180;
         }
 
         window.addEventListener( 'devicemotion', handleDeviceMotion.bind( this ), false );
