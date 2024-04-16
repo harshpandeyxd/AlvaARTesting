@@ -205,20 +205,20 @@ class IMU
         {
             this.screenOrientation = getScreenOrientation();
 
-            // if( this.screenOrientation === 'landscape_left' )
-            // {
-            //     this.screenOrientationAngle = 90;
-            // }
-            // else if( this.screenOrientation === 'landscape_right' )
-            // {
-            //     this.screenOrientationAngle = 270;
-            // }
-            // else
-            // {
-            //     this.screenOrientationAngle = 0;
-            // }
+            if( this.screenOrientation === 'landscape_left' )
+            {
+                this.screenOrientationAngle = 90;
+            }
+            else if( this.screenOrientation === 'landscape_right' )
+            {
+                this.screenOrientationAngle = 270;
+            }
+            else
+            {
+                this.screenOrientationAngle = 0;
+            }
 
-            this.screenOrientationAngle = 0;
+            //this.screenOrientationAngle = 0;
         }
 
         window.addEventListener( 'devicemotion', handleDeviceMotion.bind( this ), false );
