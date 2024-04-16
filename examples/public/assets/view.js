@@ -122,13 +122,14 @@ class ARCamIMUView
                 color: 0xffffff,
                 transparent: true,
                 depthTest: true,
-                opacity: 0.1,
+                opacity: 0.2,
                 side: THREE.DoubleSide
             } )
         );
 
-        this.ground.rotation.x = Math.PI / 2; // 90 deg
-        this.ground.position.y = -10;
+        //this.ground.rotation.x = Math.PI / 2; // 90 deg
+        this.ground.rotation.x = 0;
+        this.ground.position.y = -20;
 
         this.scene = new THREE.Scene();
         this.scene.add( new THREE.AmbientLight( 0x808080 ) );
